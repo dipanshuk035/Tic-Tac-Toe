@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" type="image/png" href="tic-tac-toe.png" />
+    <title>Tic-Tac-Toe</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h2 class="game-name">Tic Tac Toe</h2>
+    <button class="reset-btn">New Game</button>
+    <div class="login">
+      <form class="user-details">
+        <!-- <p class="names">Player 1</p> -->
+        <input type="text" class="input-names player1" placeholder="Player 1" />
+        <!-- <p class="names">Player 2</p> -->
+        <input type="text" class="input-names player2" placeholder="Player 2" />
+        <div class="players">
+          <input
+            class="input-radio"
+            type="radio"
+            name="players"
+            id="1"
+            value="1"
+          />
+          <label for="1">1 Player</label>
+          <input
+            class="input-radio"
+            type="radio"
+            name="players"
+            id="2"
+            value="2"
+          />
+          <label for="2">2 Players</label>
+        </div>
+      </form>
+      <button class="play-btn">Play</button>
+    </div>
+    <div class="declayer-names">
+      <div class="players-name-container">
+        <span class="o-property o">o</span>
+        <h3 class="o-player both-player"></h3>
+      </div>
+
+      <div class="players-name-container">
+        <span class="X-property X">X</span>
+        <h3 class="X-player both-player"></h3>
+      </div>
+    </div>
+    <div class="perent">
+      <div class="child-1 childs"></div>
+      <div class="child-2 childs"></div>
+      <div class="child-3 childs"></div>
+
+      <div class="child-4 childs"></div>
+      <div class="child-5 childs"></div>
+      <div class="child-6 childs"></div>
+
+      <div class="child-7 childs"></div>
+      <div class="child-8 childs"></div>
+      <div class="child-9 childs"></div>
+    </div>
+    <div class="overlay"></div>
+    <div class="massege hidden">
+      <h3 class="congartulations"></h3>
+      <p class="winner-name"></p>
+      <button class="continou">Continue</button>
+    </div>
+    <div class="timer hidden">
+      <p class="timer-heading">Game start in</p>
+      <p class="seconds"></p>
+    </div>
+    <footer>&copy; by Dipanshu Kumar :)</footer>
+    <script src="script.js"></script>
+  </body>
+</html>
