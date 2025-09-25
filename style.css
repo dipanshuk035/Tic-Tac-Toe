@@ -13,6 +13,9 @@ body {
   height: 700px;
   overflow: hidden;
 }
+.virsion {
+  margin-top: 20px;
+}
 
 /* .logo {
   height: 50px;
@@ -24,7 +27,7 @@ body {
   text-decoration: underline;
   margin-top: -10%;
   position: absolute;
-  transform: translateX(5%) translateY(200%);
+  transform: translateX(-10%) translateY(200%);
   z-index: 7;
   font-size: 30px;
 }
@@ -52,10 +55,6 @@ body {
   font-size: 50px;
   border: 1px rgb(255, 255, 255) solid;
   border-radius: 5px;
-}
-.childs:hover {
-  background-color: rgba(112, 150, 173, 0.3);
-  box-shadow: 0 0 0.9em skyblue;
 }
 .X-property {
   color: red;
@@ -114,9 +113,6 @@ body {
 .input-radio {
   margin-left: 10px;
 }
-.input-radio:hover {
-  box-shadow: 0 0 0.9em rgba(255, 255, 255, 0.477);
-}
 .play-btn {
   margin-left: 0%;
   margin-top: 30px;
@@ -127,9 +123,6 @@ body {
   height: 40px;
   width: 150px;
   border-radius: 14px;
-}
-.play-btn:hover {
-  background-color: #8797b58d;
 }
 .massege {
   position: absolute;
@@ -162,9 +155,6 @@ body {
   width: 150px;
   border-radius: 14px;
 }
-.continou:hover {
-  background-color: #8797b58d;
-}
 .timer {
   display: flex;
   width: inherit;
@@ -175,22 +165,29 @@ body {
 }
 @media screen and (width<=600px) {
   footer {
-    transform: translateY(400%);
+    width: 100%;
+    text-align: center;
+    transform: translate(-5%, 100%);
   }
   body {
     align-items: center;
   }
   .perent {
-    transform: scale(0.9);
+    transform: scale(0.9) translateX(-7%);
   }
   .o {
     transform: translateY(-10%);
   }
   .reset-btn {
-    transform: translateY(-100%) translateX(-200%);
     position: absolute;
     height: 40px;
     width: 100px;
+  }
+  .new-game {
+    transform: translateY(-100%) translateX(-200%);
+  }
+  .reset-game {
+    transform: translateY(-100%) translateX(50%);
   }
   .declayer-names {
     display: flex;
@@ -198,10 +195,11 @@ body {
     justify-items: center;
     margin-bottom: 30px;
     /* margin-left: -10%; */
-    transform: scale(0.7) translateY(150%);
+    transform: scale(0.7) translate(-10%, 150%);
   }
   .login {
     margin-top: 50%;
+    transform: translateX(-10%);
   }
   .overlay {
     transform: translateY(-100%);
@@ -224,12 +222,13 @@ body {
   footer {
     transform: translateY(-100%);
   }
+
   .perent {
     margin-top: 10%;
-    transform: translateY(-20%);
+    transform: translateY(-30%);
   }
   .login {
-    transform: translate(250%, 100%);
+    transform: translate(0%, 100%);
   }
   .reset-btn {
     transform: translate(-500%, -100%);
@@ -238,10 +237,10 @@ body {
   }
   .game-name {
     margin-top: 10%;
-    transform: translateX(430%) translateY(-480%);
+    transform: translateX(0%) translateY(-580%);
   }
   .declayer-names {
-    transform: translateX(90%) translateY(-420%);
+    transform: translateX(-120%) translateY(-450%);
     position: absolute;
     margin-top: 50%;
   }

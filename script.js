@@ -12,7 +12,7 @@ const congrats = document.querySelector(".congartulations");
 const winnerName = document.querySelector(".winner-name");
 const player1 = document.querySelector(".player1");
 const player2 = document.querySelector(".player2");
-const resetBtn = document.querySelector(".reset-btn");
+const newGameBtn = document.querySelector(".change-game");
 console.log(radio);
 
 let chance = true,
@@ -49,13 +49,14 @@ players.addEventListener("click", function (e) {
   }
   console.log(playersValue);
 });
+
 playBtn.addEventListener("click", function () {
-  console.log(playersValue);
+  login.classList.remove("hidden");
+  overlay.classList.remove("hidden");
   if (playersValue === "1") {
     name1 = document.querySelector(".player1").value || "You";
     name2 = "Computer";
     playerNumber = 1;
-    console.log("Hlelo");
   }
 
   if (playersValue === "2") {
@@ -63,7 +64,6 @@ playBtn.addEventListener("click", function () {
     name2 = document.querySelector(".player2").value || "Player 2";
     playerNumber = 2;
   }
-  console.log(name1, name2);
   if (selectPlayer) {
     document.querySelector(".o-player").textContent = ` = ${name1}`;
     document.querySelector(".X-player").textContent = ` = ${name2}`;
@@ -119,10 +119,12 @@ function onePlayer(boxes) {
             while (boxes[randomNum].textContent != "")
               randomNum = Math.trunc(Math.random() * 8);
           }
-          boxes[randomNum].textContent = "X";
+          setTimeout(function () {
+            boxes[randomNum].textContent = "X";
 
-          boxes[randomNum].classList.remove("o-property");
-          boxes[randomNum].classList.add("X-property");
+            boxes[randomNum].classList.remove("o-property");
+            boxes[randomNum].classList.add("X-property");
+          }, 500);
           count++;
         }
         checkWinner();
@@ -188,10 +190,17 @@ continou.addEventListener("click", function () {
     }
   }, 1000);
 });
-resetBtn.addEventListener("click", function () {
-  timer.classList.add("hidden");
-  clearInterval(newGame);
-  resetGame();
+newGameBtn.addEventListener("click", function (e) {
+  if (e.target.classList.contains("new-game")) {
+    resetGame();
+    timer.classList.add("hidden");
+    clearInterval(newGame);
+  }
+  if (e.target.classList.contains("reset-game")) {
+    resetGame();
+    login.classList.remove("hidden");
+    overlay.classList.remove("hidden");
+  }
 });
 function resetGame() {
   count = 0;
@@ -201,6 +210,7 @@ function resetGame() {
     b.textContent = "";
   });
 }
+
 // perentBox.addEventListener("cilck", function (e) {
 //   if (e.target.classList.contains("childs")) {
 //     console.log(randomNum);
