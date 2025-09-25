@@ -177,7 +177,7 @@ continou.addEventListener("click", function () {
   massege.classList.add("hidden");
   overlay.classList.add("hidden");
   let second = 5;
-  const newGame = setInterval(() => {
+  var newGame = setInterval(() => {
     secondContainer.textContent = second;
     second--;
     if (second < 0) {
@@ -189,6 +189,8 @@ continou.addEventListener("click", function () {
   }, 1000);
 });
 resetBtn.addEventListener("click", function () {
+  timer.classList.add("hidden");
+  clearInterval(newGame);
   resetGame();
 });
 function resetGame() {

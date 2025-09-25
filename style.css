@@ -13,9 +13,7 @@ body {
   height: 700px;
   overflow: hidden;
 }
-footer {
-  transform: translateY(1300%);
-}
+
 /* .logo {
   height: 50px;
   width: 50px;
@@ -78,7 +76,7 @@ footer {
   transform: translateY(30%);
 }
 .X {
-  transform: translateY(10%);
+  transform: translateY(15%);
 }
 .players-name-container {
   display: flex;
@@ -140,7 +138,7 @@ footer {
   z-index: 6;
   font-size: 30px;
   border-radius: 10px;
-  transform: translateY(-120%) translateX(-10%);
+  transform: translateY(-100%) translateX(0%);
   width: 400px;
   height: 500px;
   background: none;
@@ -176,6 +174,9 @@ footer {
   margin-left: 6px;
 }
 @media screen and (width<=600px) {
+  footer {
+    transform: translateY(400%);
+  }
   body {
     align-items: center;
   }
@@ -219,6 +220,9 @@ footer {
 @media screen and (width>=600px) {
   body {
     justify-items: center;
+  }
+  footer {
+    transform: translateY(-100%);
   }
   .perent {
     margin-top: 10%;
