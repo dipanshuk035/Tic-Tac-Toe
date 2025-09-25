@@ -124,7 +124,7 @@ function onePlayer(boxes) {
 
             boxes[randomNum].classList.remove("o-property");
             boxes[randomNum].classList.add("X-property");
-          }, 500);
+          }, 100);
           count++;
         }
         checkWinner();

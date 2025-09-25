@@ -167,13 +167,13 @@ body {
   footer {
     width: 100%;
     text-align: center;
-    transform: translate(-5%, 100%);
+    transform: translate(-5%, 150%);
   }
   body {
     align-items: center;
   }
   .perent {
-    transform: scale(0.9) translateX(-7%);
+    transform: scale(0.9) translateX(-2.5%);
   }
   .o {
     transform: translateY(-10%);
@@ -187,7 +187,7 @@ body {
     transform: translateY(-100%) translateX(-200%);
   }
   .reset-game {
-    transform: translateY(-100%) translateX(50%);
+    transform: translateY(-100%) translateX(80%);
   }
   .declayer-names {
     display: flex;
@@ -199,7 +199,7 @@ body {
   }
   .login {
     margin-top: 50%;
-    transform: translateX(-10%);
+    transform: translateX(0%);
   }
   .overlay {
     transform: translateY(-100%);
