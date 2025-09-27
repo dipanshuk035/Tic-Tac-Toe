@@ -13,12 +13,11 @@ const winnerName = document.querySelector(".winner-name");
 const player1 = document.querySelector(".player1");
 const player2 = document.querySelector(".player2");
 const newGameBtn = document.querySelector(".change-game");
-console.log(radio);
 
 let chance = true,
   count = 0;
 
-var name1,
+let name1,
   name2,
   selectPlayer = false,
   playerNumber,
@@ -36,8 +35,28 @@ const winPettern = [
   [6, 7, 8],
 ];
 
+newGameBtn.addEventListener("click", function (e) {
+  if (e.target.classList.contains("new-game")) {
+    resetGame();
+  }
+  if (e.target.classList.contains("reset-game")) {
+    resetGame();
+    login.classList.remove("hidden");
+    overlay.classList.remove("hidden");
+  }
+});
+function resetGame() {
+  count = 0;
+  chance = true;
+  isWinner = false;
+  box.forEach((b) => {
+    b.textContent = "";
+    b.classList.remove("o-property", "X-property");
+  });
+  if (!timer.classList.contains("hidden")) timer.classList.add("hidden");
+  clearInterval(newGame);
+}
 players.addEventListener("click", function (e) {
-  console.log(name1, name2);
   selectPlayer = true;
   if (e.target.value === "1") {
     player2.classList.add("hidden");
@@ -47,33 +66,44 @@ players.addEventListener("click", function (e) {
     playersValue = e.target.value;
     player2.classList.remove("hidden");
   }
-  console.log(playersValue);
 });
 
 playBtn.addEventListener("click", function () {
-  login.classList.remove("hidden");
-  overlay.classList.remove("hidden");
   if (playersValue === "1") {
     name1 = document.querySelector(".player1").value || "You";
     name2 = "Computer";
+    // console.log("computer");
+    onePlayer(box);
     playerNumber = 1;
   }
 
   if (playersValue === "2") {
+    // console.log("Humen");
     name1 = document.querySelector(".player1").value || "Player 1";
     name2 = document.querySelector(".player2").value || "Player 2";
     playerNumber = 2;
+
+    twoPlayers(box);
   }
   if (selectPlayer) {
     document.querySelector(".o-player").textContent = ` = ${name1}`;
     document.querySelector(".X-player").textContent = ` = ${name2}`;
     login.classList.add("hidden");
     overlay.classList.add("hidden");
-    console.log(playerNumber);
-    if (playerNumber == 1) {
-      onePlayer(box);
-    }
-    if (playerNumber === 2) twoPlayers(box);
+    box.forEach((boxes) => {
+      boxes.addEventListener("click", function () {
+        console.log(playerNumber);
+        if (playerNumber == 1) {
+          onePlayer(boxes);
+          console.log("computer");
+        }
+        if (playerNumber === 2) {
+          twoPlayers(boxes);
+          console.log("Humen");
+        }
+        chance = !chance;
+      });
+    });
   } else {
     alert("Please Select Players");
   }
@@ -81,63 +111,58 @@ playBtn.addEventListener("click", function () {
 // box.forEach(function (el) {
 // });
 function twoPlayers(boxes) {
-  boxes.forEach((box) => {
-    box.addEventListener("click", function () {
-      if (box.textContent === "" && isWinner === false) {
-        if (chance) {
-          box.textContent = "o";
-          if (box.textContent == "o") box.classList.add("o-property");
-        } else {
-          box.textContent = "X";
-          if (box.textContent == "X") box.classList.add("X-property");
-        }
-        count++;
-        chance = !chance;
-        if (count === 9 && isWinner === false) {
-          massege.classList.remove("hidden");
-          congrats.textContent = "Play Again";
-          winnerName.textContent = "Game Tai";
-        }
-        checkWinner();
-      }
-    });
-  });
+  console.log("Humen");
+
+  // boxes.forEach((box) => {
+  // box.addEventListener("click", function () {
+  if (boxes.textContent === "" && isWinner === false) {
+    if (chance) {
+      boxes.textContent = "o";
+      if (boxes.textContent == "o") boxes.classList.add("o-property");
+    } else {
+      boxes.textContent = "X";
+      if (boxes.textContent == "X") boxes.classList.add("X-property");
+    }
+    count++;
+    // chance = !chance;
+    if (count === 9 && isWinner === false) {
+      massege.classList.remove("hidden");
+      congrats.textContent = "Play Again";
+      winnerName.textContent = "Game Tai";
+    }
+    checkWinner();
+  }
+  // });
+  // });
 }
 function onePlayer(boxes) {
-  // console.log(boxes[randomNum]);
-  // boxes.forEach((box) => {
-  console.log("hello ");
-  boxes.forEach((el) => {
-    el.addEventListener("click", function () {
-      if (el.textContent === "" && isWinner === false) {
-        let randomNum = Math.trunc(Math.random() * 8);
-        el.textContent = "o";
-        if (el.textContent == "o") el.classList.add("o-property");
-        count++;
-        if (count <= 8) {
-          if (boxes[randomNum].textContent != "") {
-            while (boxes[randomNum].textContent != "")
-              randomNum = Math.trunc(Math.random() * 8);
-          }
-          setTimeout(function () {
-            boxes[randomNum].textContent = "X";
-
-            boxes[randomNum].classList.remove("o-property");
-            boxes[randomNum].classList.add("X-property");
-          }, 100);
+  console.log("computer");
+  if (boxes.textContent === "" && isWinner === false) {
+    let randomNum = Math.trunc(Math.random() * 8);
+    boxes.textContent = "o";
+    if (boxes.textContent == "o") boxes.classList.add("o-property");
+    count++;
+    if (count < 9) {
+      let emptyCells = [...box].filter((b) => b.textContent === "");
+      if (emptyCells.length > 0) {
+        let randomCell =
+          emptyCells[Math.floor(Math.random() * emptyCells.length)];
+        setTimeout(() => {
+          randomCell.textContent = "X";
+          randomCell.classList.add("X-property");
           count++;
-        }
-        checkWinner();
-        if (count === 9 && isWinner === false) {
-          massege.classList.remove("hidden");
-          congrats.textContent = "Play Again";
-          winnerName.textContent = "Game Tai";
-          return;
-        }
+          checkWinner();
+        }, 100);
       }
-    });
-    // });
-  });
+    }
+
+    checkWinner();
+    if (count === 9 && isWinner === false) {
+      massege.classList.remove("hidden");
+      congrats.textContent = "Play Again";
+      winnerName.textContent = "Game Tai";
+    }
+  }
 }
 // function gameTai(check) {
 // }
@@ -171,6 +196,8 @@ function checkWinner() {
     }
   });
 }
+
+let newGame;
 const continou = document.querySelector(".continou");
 const secondContainer = document.querySelector(".seconds");
 const timer = document.querySelector(".timer");
@@ -179,7 +206,7 @@ continou.addEventListener("click", function () {
   massege.classList.add("hidden");
   overlay.classList.add("hidden");
   let second = 5;
-  var newGame = setInterval(() => {
+  newGame = setInterval(() => {
     secondContainer.textContent = second;
     second--;
     if (second < 0) {
@@ -188,41 +215,5 @@ continou.addEventListener("click", function () {
       timer.classList.add("hidden");
       secondContainer.textContent = "";
     }
-  }, 1000);
+  }, 700);
 });
-newGameBtn.addEventListener("click", function (e) {
-  if (e.target.classList.contains("new-game")) {
-    resetGame();
-    timer.classList.add("hidden");
-    clearInterval(newGame);
-  }
-  if (e.target.classList.contains("reset-game")) {
-    resetGame();
-    login.classList.remove("hidden");
-    overlay.classList.remove("hidden");
-  }
-});
-function resetGame() {
-  count = 0;
-  chance = true;
-  isWinner = false;
-  box.forEach((b) => {
-    b.textContent = "";
-  });
-}
-
-// perentBox.addEventListener("cilck", function (e) {
-//   if (e.target.classList.contains("childs")) {
-//     console.log(randomNum);
-//     // if (e.target.textContent === "") {
-//     e.target.textContent = "o";
-//     e.target.classList.add("o-property");
-//     // if (box[randomNum].textContent != "") {
-//     //   randomNum = Math.trunc(Math.random() * 8);
-//     //   console.log(randomNum);
-//     // }
-//     // box[randomNum].textContent = "X";
-//     // box[randomNum].classList.add("X-property");
-//     // checkWinner();
-//     // }
-//   }
