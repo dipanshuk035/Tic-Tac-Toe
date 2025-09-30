@@ -35,20 +35,11 @@ const winPettern = [
   [6, 7, 8],
 ];
 
-newGameBtn.addEventListener("click", function (e) {
-  if (e.target.classList.contains("new-game")) {
-    resetGame();
-  }
-  if (e.target.classList.contains("reset-game")) {
-    resetGame();
-    login.classList.remove("hidden");
-    overlay.classList.remove("hidden");
-  }
-});
 function resetGame() {
   count = 0;
   chance = true;
   isWinner = false;
+
   box.forEach((b) => {
     b.textContent = "";
     b.classList.remove("o-property", "X-property");
@@ -56,6 +47,16 @@ function resetGame() {
   if (!timer.classList.contains("hidden")) timer.classList.add("hidden");
   clearInterval(newGame);
 }
+newGameBtn.addEventListener("click", function (e) {
+  if (e.target.classList.contains("new-game")) {
+    resetGame();
+  }
+  if (e.target.classList.contains("reset-game")) {
+    (selectPlayer = false), resetGame();
+    login.classList.remove("hidden");
+    overlay.classList.remove("hidden");
+  }
+});
 players.addEventListener("click", function (e) {
   selectPlayer = true;
   if (e.target.value === "1") {
@@ -73,7 +74,6 @@ playBtn.addEventListener("click", function () {
     name1 = document.querySelector(".player1").value || "You";
     name2 = "Computer";
     // console.log("computer");
-    onePlayer(box);
     playerNumber = 1;
   }
 
@@ -82,8 +82,6 @@ playBtn.addEventListener("click", function () {
     name1 = document.querySelector(".player1").value || "Player 1";
     name2 = document.querySelector(".player2").value || "Player 2";
     playerNumber = 2;
-
-    twoPlayers(box);
   }
   if (selectPlayer) {
     document.querySelector(".o-player").textContent = ` = ${name1}`;
@@ -101,7 +99,6 @@ playBtn.addEventListener("click", function () {
           twoPlayers(boxes);
           console.log("Humen");
         }
-        chance = !chance;
       });
     });
   } else {
@@ -111,15 +108,17 @@ playBtn.addEventListener("click", function () {
 // box.forEach(function (el) {
 // });
 function twoPlayers(boxes) {
-  console.log("Humen");
-
   // boxes.forEach((box) => {
   // box.addEventListener("click", function () {
   if (boxes.textContent === "" && isWinner === false) {
     if (chance) {
+      // console.log("O");
+
       boxes.textContent = "o";
       if (boxes.textContent == "o") boxes.classList.add("o-property");
     } else {
+      // console.log("X");
+
       boxes.textContent = "X";
       if (boxes.textContent == "X") boxes.classList.add("X-property");
     }
@@ -131,6 +130,7 @@ function twoPlayers(boxes) {
       winnerName.textContent = "Game Tai";
     }
     checkWinner();
+    chance = !chance;
   }
   // });
   // });
@@ -155,6 +155,7 @@ function onePlayer(boxes) {
         }, 100);
       }
     }
+    chance = !chance;
 
     checkWinner();
     if (count === 9 && isWinner === false) {
